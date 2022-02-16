@@ -3,10 +3,34 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import {BrowserRouter, Route, Routes} from 'react-router-dom';
+import Home from "./components/pages/Home";
+import Data from "./components/pages/Data";
+import DataList from "./components/DataList";
+import DataPage from "./components/DataPage";
+import Cool from "./components/pages/Cool";
+import Red from "./components/pages/Red";
+import Blue from "./components/pages/Blue";
+import Green from "./components/pages/Green";
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+      <BrowserRouter>
+          <Routes>
+              <Route path={"/"} element={<App/>}>
+                  <Route index element={<Home />} />
+                  <Route path={'red'} element={<Red />} />
+                  <Route path={'blue'} element={<Blue />} />
+                  <Route path={'green'} element={<Green />} />
+                  <Route path={"data"} element={<Data />}>
+                      <Route index element={<DataList />}/>
+                      <Route path={":id"} element={<DataPage />}/>
+                  </Route>
+                  <Route path={"cool"} element={<Cool />}/>
+              </Route>
+          </Routes>
+          <App />
+      </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')
 );
